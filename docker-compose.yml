@@ -1,0 +1,30 @@
+version: "3.1"
+services:
+  wordpress:
+    image: wordpress
+    restart: always
+    container_name: "wpsite"
+    ports:
+      - 5050:80
+    volumes:
+      - ~/gamesstore/wpsite:/var/www/html
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: senac
+      WORDPRESS_DB_PASSWORD: 123@senac
+      WORDPRESS_DB_NAME: gamesstore
+
+
+  db:
+    image: mysql:8.0
+    restart: always
+    container_name: "wpdados"
+    environment:
+      MYSQL_DATABASE: gamesstore
+      MYSQL_USER: senac
+      MYSQL_PASSWORD: 123@senac
+      MYSQL_ROOT_PASSWORD: 123@senac
+    ports:
+      - 4040:3306
+    volumes:
+      - ~/gamesstore/wpdados:/var/lib/mysql 
